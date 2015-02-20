@@ -9,6 +9,30 @@ angular.module('myApp.user', ['ngRoute', 'ngResource'])
   });
 }])
 
-.controller('UserCtrl', ['$scope', '$routeParams', '$rootScope', '$resource', function($scope, $routeParams, $rootScope, $resource) {
-  $scope.model = $resource('https://api.stackexchange.com/2.2/me?access_token=' + $rootScope.access_token);
+.controller('UserCtrl', ['$scope', '$routeParams', '$rootScope', '$http', '$location', function($scope, $routeParams, $rootScope, $http, $location) {
+
+	// clear the hash from the oath
+	$location.hash('');
+
+	// fetch the the current user and set it as the model
+	$http({
+		url: 'https://api.stackexchange.com/2.2/me',
+		method: "GET",
+		params: {
+			access_token: $rootScope.access_token,
+			key: '6S9zu7acV8JdHBn473Q6yw((',
+			site: 'stackoverflow'
+		}
+	}).success(function(data, status, headers, config) {
+		// this callback will be called asynchronously
+		// when the response is available
+		console.log(data);
+		$scope.model = data;
+	}).error(function(data, status, headers, config) {
+		// called asynchronously if an error occurs
+		// or server returns response with an error status.
+		console.log('error ' + data.error_message);
+		$scope.error = data;
+	});
+
 }]);
