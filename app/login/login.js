@@ -14,8 +14,9 @@ loginModule.controller('LoginController', ['$scope', '$location', '$rootScope', 
 	// checks to see if stackoverflow oath put an access token in the url
 
 	if($location.hash()){
-		$rootScope.access_token = $location.hash().split('=')[1];
-		console.log($location.hash().split('=')[1]);
+		$rootScope.access_token = $location.hash().split('&')[0].split('=')[1];
+		console.log($location.hash());
+		console.log($location.hash().split('&')[0].split('=')[1]);
 		$location.path('/user/');
 	}
 
