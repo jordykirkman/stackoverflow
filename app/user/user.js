@@ -9,6 +9,6 @@ angular.module('myApp.user', ['ngRoute'])
   });
 }])
 
-.controller('UserCtrl', ['$scope', '$routeParams', '$rootScope', function($scope, $routeParams, $rootScope) {
+.controller('UserCtrl', ['$scope', '$routeParams', '$rootScope', '$resource', function($scope, $routeParams, $rootScope, $resource) {
   $scope.model = $resource('https://api.stackexchange.com/2.2/me?access_token=' + $rootScope.access_token);
 }]);
