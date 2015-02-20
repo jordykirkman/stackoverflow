@@ -15,8 +15,6 @@ loginModule.controller('LoginController', ['$scope', '$location', '$rootScope', 
 
 	if($location.hash()){
 		$rootScope.access_token = $location.hash().split('&')[0].split('=')[1];
-		console.log($location.hash());
-		console.log($location.hash().split('&')[0].split('=')[1]);
 		$location.path('/user/');
 	}
 

@@ -19,8 +19,8 @@ angular.module('myApp.user', ['ngRoute', 'ngResource'])
 		url: 'https://api.stackexchange.com/2.2/me',
 		method: "GET",
 		params: {
-			access_token: key + $rootScope.access_token,
-			// key: '6S9zu7acV8JdHBn473Q6yw((',
+			access_token: $rootScope.access_token,
+			key: '6S9zu7acV8JdHBn473Q6yw((',
 			site: 'stackoverflow'
 		}
 	}).success(function(data, status, headers, config) {
