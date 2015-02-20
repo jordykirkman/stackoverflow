@@ -1,19 +1,21 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute'])
+var loginModule = angular.module('myApp.login', ['ngRoute']);
 
-.config(['$routeProvider', function($routeProvider, $routeParams) {
+loginModule.config(['$routeProvider', function($routeProvider, $routeParams) {
   $routeProvider.when('/login', {
     templateUrl: 'login/login.html',
-    controller: 'LoginCtrl'
+    controller: 'LoginController'
   });
 }])
 
-.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) {
+loginModule.controller('LoginController', ['$scope', '$location', '$rootScope', function($scope, $location, $rootScope) {
 
-	// forward to the oath link
-	// it will then return to the user route
-	$scope.login = function() {
-    }
+	// checks to see if stackoverflow oath put an access token in the url
+	if($location.search().access_token){
+		$rootScope.access_token = $location.search().access_token;
+		$location.path('/user/');
+	}
+
 
 }]);
