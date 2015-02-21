@@ -6,6 +6,7 @@ angular.module('myApp', [
   'myApp.login',
   'myApp.user',
   'myApp.search',
+  'myApp.question',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
