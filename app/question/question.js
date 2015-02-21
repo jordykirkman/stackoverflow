@@ -9,7 +9,7 @@ angular.module('myApp.question', ['ngRoute', 'ngResource'])
   });
 }])
 
-.controller('QuestionController', ['$scope', '$routeParams', '$rootScope', '$http', function($scope, $routeParams, $rootScope, $http) {
+.controller('QuestionController', ['$scope', '$routeParams', '$rootScope', '$http', '$sce', function($scope, $routeParams, $rootScope, $http, $sce) {
 
 	// fetch the the current user and set it as the model
 	$http({
@@ -18,11 +18,15 @@ angular.module('myApp.question', ['ngRoute', 'ngResource'])
 		params: {
 			access_token: $rootScope.access_token,
 			key: '6S9zu7acV8JdHBn473Q6yw((',
+			filter: "!-*f(6rkuau1P",
 			site: 'stackoverflow'
 		}
 	}).success(function(data, status, headers, config) {
-		// this callback will be called asynchronously
-		// when the response is available
+		// convert the body strings to html
+		data.items[0].body = $sce.trustAsHtml(data.items[0].body);
+		data.items[0].answers.forEach(function(answer){
+			answer.body = $sce.trustAsHtml(answer.body);
+		});
 		$scope.model = data.items[0];
 	}).error(function(data, status, headers, config) {
 		// called asynchronously if an error occurs
