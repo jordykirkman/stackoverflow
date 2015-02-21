@@ -1,5 +1,7 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<ul class="menu">
+	<li><a href="#/user">Profile</a></li>
+	<li><a href="#/search">Search</a></li>
+</ul>
+<input ng-value="{{searchTitle}}" placeholder="search in title"/>
+<input ng-value="{{searchTags}}"  placeholder="tags"/>
+<input ng-value="{{searchNotTags}}"  placeholder="not tagged"/>
