@@ -18,7 +18,7 @@ angular.module('myApp.question', ['ngRoute', 'ngResource'])
 		params: {
 			access_token: $rootScope.access_token,
 			key: '6S9zu7acV8JdHBn473Q6yw((',
-			filter: "!-*f(6rkuau1P",
+			filter: "!FnCncR1q_)Ax*SjT0)pznvQ.H6",
 			site: 'stackoverflow'
 		}
 	}).success(function(data, status, headers, config) {
