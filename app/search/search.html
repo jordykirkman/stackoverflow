@@ -8,6 +8,6 @@
 <button ng-click="search()">search</button>
 <ul>
 	<li ng-repeat="question in model">
-		{{question.title}}
+		<a href="#/question/{{question.question_id}}">{{question.title}}</a>
 	</li>
 </ul>
