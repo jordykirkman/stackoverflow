@@ -18,15 +18,17 @@ angular.module('myApp.question', ['ngRoute', 'ngResource'])
 		params: {
 			access_token: $rootScope.access_token,
 			key: '6S9zu7acV8JdHBn473Q6yw((',
-			filter: "!FnCncR1q_)Ax*SjT0)pznvQ.H6",
+			filter: "!tRhd)msKfDI_kdNs2zdw2HVvoAIWUBj",
 			site: 'stackoverflow'
 		}
 	}).success(function(data, status, headers, config) {
 		// convert the body strings to html
 		data.items[0].body = $sce.trustAsHtml(data.items[0].body);
-		data.items[0].answers.forEach(function(answer){
-			answer.body = $sce.trustAsHtml(answer.body);
-		});
+		if(data.items[0].answers){
+			data.items[0].answers.forEach(function(answer){
+				answer.body = $sce.trustAsHtml(answer.body);
+			});
+		}
 		$scope.model = data.items[0];
 	}).error(function(data, status, headers, config) {
 		// called asynchronously if an error occurs

@@ -2,6 +2,7 @@
 	<li><a href="#/user">Profile</a></li>
 	<li><a href="#/search">Search</a></li>
 </ul>
+
 <h3>{{model.title}}</h3>
 answered? {{model.is_answered}}
 <div ng-bind-html="model.body"></div>
@@ -9,6 +10,17 @@ answered? {{model.is_answered}}
 	{{model.owner.displayName}} {{model.owner.reputation}}
 	<img ng-src="{{model.owner.profile_image}}"/>
 </a>
+
+<ul>
+	<li ng-repeat="comment in model.comments">
+		{{comment.body}}
+		<a href="{{comment.owner.link}}" target="_blank">
+			{{comment.owner.displayName}} {{comment.owner.reputation}}
+			<img ng-src="{{comment.owner.profile_image}}"/>
+		</a>
+	</li>
+</ul>
+
 <ul>
 	<li ng-repeat="tag in model.tags">
 		{{tag}}
@@ -18,5 +30,9 @@ answered? {{model.is_answered}}
 <ul>
 	<li ng-repeat="answer in model.answers">
 		<div ng-bind-html="answer.body"></div>
+		<a href="{{answer.owner.link}}" target="_blank">
+			{{model.owner.displayName}} {{model.owner.reputation}}
+			<img ng-src="{{answer.owner.profile_image}}"/>
+		</a>
 	</li>
 </ul>
