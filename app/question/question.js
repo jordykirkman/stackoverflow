@@ -2,7 +2,7 @@
 
 angular.module('app.question', ['ngRoute', 'ngResource'])
 
-.config(['$routeProvider', function($routeProvider, $routeParams) {
+.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/question/:question_id', {
     templateUrl: 'question/question.html',
     controller: 'QuestionController'
@@ -10,9 +10,9 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 }])
 
 // get a question by id. the method returns a list, but since we will only submit one, we just want the first back
-.factory('Question', ['$resource', '$rootScope',
-	function($resource, $rootScope){
-		return $resource('https://api.stackexchange.com/2.2/questions/' + $routeParams.question_id, {}, {
+.factory('Question', ['$resource', '$rootScope', '$sce',
+	function($resource, $rootScope, $sce){
+		return $resource('https://api.stackexchange.com/2.2/questions/:question_id', {}, {
 			query: {
 				method:'GET',
 				params:{
@@ -32,6 +32,7 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 						question.answers.forEach(function(answer){
 							answer.body = $sce.trustAsHtml(answer.body);
 						});
+						return question;
 					} else {
 						return JSON.parse(data);
 					}
@@ -41,9 +42,9 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 	}
 ])
 
-.controller('QuestionController', ['Question', '$scope', '$routeParams', '$rootScope', '$http', '$sce', function(Question, $scope, $routeParams, $rootScope, $http, $sce) {
+.controller('QuestionController', ['Question', '$scope', '$routeParams', '$rootScope', '$http', function(Question, $scope, $routeParams, $rootScope, $http) {
 
 	// fetch the the current user and set it as the model
-	$scope.model = Question.query();
+	$scope.model = Question.query({question_id: $routeParams.question_id});
 
 }]);
