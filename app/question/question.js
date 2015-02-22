@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.question', ['ngRoute', 'ngResource'])
+angular.module('app.question', ['ngRoute', 'ngResource'])
 
 .config(['$routeProvider', function($routeProvider, $routeParams) {
   $routeProvider.when('/question/:question_id', {

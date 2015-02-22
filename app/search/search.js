@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.search', ['ngRoute'])
+angular.module('app.search', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search', {

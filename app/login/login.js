@@ -1,6 +1,6 @@
 'use strict';
 
-var loginModule = angular.module('myApp.login', ['ngRoute']);
+var loginModule = angular.module('app.login', ['ngRoute']);
 
 loginModule.config(['$routeProvider', function($routeProvider, $routeParams) {
   $routeProvider.when('/login', {
