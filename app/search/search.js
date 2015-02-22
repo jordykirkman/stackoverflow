@@ -34,7 +34,7 @@ angular.module('app.search', ['ngRoute'])
 	$scope.searchNotTags = null;
 	$scope.model = [];
 
-	// search function performs a query with the criteria
+	// search function performs a query with the criteria and parameters
 	$scope.search = function(){
 		$scope.model = Search.query({
 			intitle: $scope.searchTitle,
