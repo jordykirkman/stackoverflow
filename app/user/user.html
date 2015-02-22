@@ -15,19 +15,46 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<ul>
-			<li ng-repeat="badge in badges">
+		<h3>
+			<span class="label label-default" ng-repeat="badge in badges">
 				{{badge.name}}
-			</li>
-		</ul>
+			</span>
+		</h3>
 	</div>
 </div>
-
+<div class="page-header">
+	<h1>Recent activity</h1>
+</div>
 <div class="row">
 	<div class="col-md-2" ng-repeat="item in timeline">
 		{{item.timeline_type}}
 		{{item.creation_date}}
-		{{item.title}}
-		{{item.detail}}
+		<p>
+			{{item.title}}
+			{{item.detail}}
+		</p>
+	</div>
+</div>
+<div class="page-header">
+	<h1>Favorites</h1>
+</div>
+<div class="row">
+	<div class="col-md-12" ng-repeat="item in favorites">
+		<div class="row">
+			<div class="col-md-1">
+				{{item.up_vote_count}}<br/>
+				vote
+			</div>
+			<div class="col-md-1">
+				{{item.answer_count}}<br/>
+				answers
+			</div>
+			<div class="col-md-10">
+				<h3>{{item.title}} {{item.creation_date}}</h3>
+				<span class="label label-default" ng-repeat="tag in item.tags">
+					{{tag}}
+				</span>
+			</div>
+		</div>
 	</div>
 </div>
