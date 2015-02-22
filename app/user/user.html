@@ -1,13 +1,33 @@
-<ul class="menu">
-	<li><a href="#/user">Profile</a></li>
-	<li><a href="#/search">Search</a></li>
-</ul>
-<h3>{{model.display_name}} {{model.reputation}}</h3>
-<img ng-src="{{model.profile_image}}"/>
-<ul>
-	<li ng-repeat="item in timeline">
+<div class="row">
+	<div class="col-md-4">
+		<img ng-src="{{model.profile_image}}"/>
+		{{model.display_name}}
+	</div>
+	<div class="col-md-4">
+		<h4>Level {{model.reputation}}</h4>
+		{{model.website_url}}
+		{{model.about_me}}
+	</div>
+	<div class="col-md-4">
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<ul>
+			<li ng-repeat="badge in badges">
+				{{badge.name}}
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2" ng-repeat="item in timeline">
 		{{item.timeline_type}}
+		{{item.creation_date}}
 		{{item.title}}
 		{{item.detail}}
-	</li>
-</ul>
+	</div>
+</div>
