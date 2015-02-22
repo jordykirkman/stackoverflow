@@ -9,35 +9,41 @@ angular.module('app.search', ['ngRoute'])
   });
 }])
 
-.controller('SearchController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+// search questions by title and tags
+.factory('Search', ['$resource', '$rootScope', function($resource, $rootScope){
+	return $resource('https://api.stackexchange.com/2.2/search/', {}, {
+		query: {
+			method:'GET',
+			isArray:true,
+			// strip out of root key and just return the array
+			transformResponse: function(data){
+				if(JSON.parse(data).items){
+					return JSON.parse(data).items;
+				} else {
+					return JSON.parse(data);
+				}
+			}
+		}
+	});
+}])
+
+.controller('SearchController', ['Search', '$scope', '$rootScope', '$http', function(Search, $scope, $rootScope, $http) {
 
 	$scope.searchTitle = null;
 	$scope.searchTags = null;
 	$scope.searchNotTags = null;
+	$scope.model = [];
 
+	// search function performs a query with the criteria
 	$scope.search = function(){
-		// fetch the the current user and set it as the model
-		$http({
-			url: 'https://api.stackexchange.com/2.2/search',
-			method: "GET",
-			params: {
-				access_token: $rootScope.access_token,
-				intitle: $scope.searchTitle,
-				tagged: $scope.searchTags,
-				nottagged: $scope.searchNotTags,
-				key: '6S9zu7acV8JdHBn473Q6yw((',
-				site: 'stackoverflow'
-			}
-		}).success(function(data, status, headers, config) {
-			// this callback will be called asynchronously
-			// when the response is available
-			console.log(data);
-			$scope.model = data.items;
-		}).error(function(data, status, headers, config) {
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
-			console.log('error ' + data.error_message);
-			$scope.error = data;
+		$scope.model = Search.query({
+			intitle: $scope.searchTitle,
+			tagged: $scope.searchTags,
+			nottagged: $scope.searchNotTags,
+			access_token: $rootScope.access_token,
+			key: '6S9zu7acV8JdHBn473Q6yw((',
+			filter: "!tRhd)msKfDI_kdNs2zdw2HVvoAIWUBj",
+			site: 'stackoverflow'
 		});
 	}
 
