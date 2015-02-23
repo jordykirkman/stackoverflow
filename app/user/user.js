@@ -18,6 +18,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 				params:{
 					access_token: $rootScope.access_token,
 					key: '6S9zu7acV8JdHBn473Q6yw((',
+					filter: '!9YdnSA07B',
 					site: 'stackoverflow'
 				},
 				isArray:false,

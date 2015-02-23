@@ -1,12 +1,18 @@
 <div class="row">
 	<div class="col-md-4">
-		<img ng-src="{{model.profile_image}}"/>
-		{{model.display_name}}
+		<div class="row question-box">
+			<div class="col-m-12 align-center">
+				<img ng-src="{{model.profile_image}}"/>
+			</div>
+			<div class="col-m-12 align-center">
+				<h4>{{model.display_name}}</h4>
+			</div>
+		</div>
 	</div>
 	<div class="col-md-4">
 		<h4>Level {{model.reputation}}</h4>
-		{{model.website_url}}
-		{{model.about_me}}
+		member since {{model.creation_date}}<br/>
+		{{model.website_url}}<br/>
 	</div>
 	<div class="col-md-4">
 	</div>
@@ -16,18 +22,20 @@
 <div class="row">
 	<div class="col-md-12">
 		<h3>
-			<span class="label label-default" ng-repeat="badge in badges">
+			<span class="label label-default tag" ng-repeat="badge in badges">
 				{{badge.name}}
 			</span>
 		</h3>
 	</div>
 </div>
+
 <div class="page-header">
 	<h1>Recent activity</h1>
 </div>
+
 <div class="row">
 	<div class="col-md-2" ng-repeat="item in timeline">
-		{{item.timeline_type}}
+		<h4>{{item.timeline_type}}</h4>
 		{{item.creation_date}}
 		<p>
 			{{item.title}}
@@ -35,25 +43,29 @@
 		</p>
 	</div>
 </div>
+
 <div class="page-header">
 	<h1>Favorites</h1>
 </div>
+
 <div class="row">
-	<div class="col-md-12" ng-repeat="item in favorites">
+	<div class="col-md-12 question-box" ng-repeat="item in favorites">
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-1 align-center">
 				{{item.up_vote_count}}<br/>
 				vote
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-1 align-center">
 				{{item.answer_count}}<br/>
 				answers
 			</div>
-			<div class="col-md-10">
-				<h3>{{item.title}} {{item.creation_date}}</h3>
-				<span class="label label-default" ng-repeat="tag in item.tags">
-					{{tag}}
-				</span>
+			<div class="col-md-10 question-box-interior">
+				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date}}</h4></a>
+				<h4>
+					<span class="label label-default tag" ng-repeat="tag in item.tags">
+						{{tag}}
+					</span>
+				</h4>
 			</div>
 		</div>
 	</div>
