@@ -1,38 +1,75 @@
-<ul class="menu">
-	<li><a href="#/user">Profile</a></li>
-	<li><a href="#/search">Search</a></li>
-</ul>
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-1">
+				<img class="img-thumbnail" ng-src="{{model.owner.profile_image}}"/>
+			</div>
+			<div class="col-md-11">
+				<a href="{{owner.link}}" target="_blank">
+					{{model.owner.display_name}} {{model.owner.reputation}}<br/>
+					{{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}
+				</a>
+			</div>
+		</div>
+		<h3>{{model.title}}</h3>
+		<div ng-bind-html="model.body"></div>
+		<h4>
+			<span class="label label-default tag" ng-repeat="tag in model.tags">
+				{{tag}}
+			</span>
+		</h4>
+	</div>
+</div>
 
-<h3>{{model.title}}</h3>
-answered? {{model.is_answered}}
-<div ng-bind-html="model.body"></div>
-<a href="{{owner.link}}" target="_blank">
-	{{model.owner.displayName}} {{model.owner.reputation}}
-	<img ng-src="{{model.owner.profile_image}}"/>
-</a>
-
-<ul>
-	<li ng-repeat="comment in model.comments">
-		{{comment.body}}
+<h5>Comments</h5>
+<div class="row" ng-repeat="comment in model.comments">
+	<div class="col-md-1">
+		<img class="img-thumbnail" ng-src="{{comment.owner.profile_image}}"/>
+	</div>
+	<div class="col-md-11">
 		<a href="{{comment.owner.link}}" target="_blank">
-			{{comment.owner.displayName}} {{comment.owner.reputation}}
-			<img ng-src="{{comment.owner.profile_image}}"/>
+			<h6>{{comment.owner.display_name}} {{comment.owner.reputation}}</h6>
 		</a>
-	</li>
-</ul>
+		{{comment.body}}
+	</div>
+</div>
 
-<ul>
-	<li ng-repeat="tag in model.tags">
-		{{tag}}
-	</li>
-</ul>
 
-<ul>
-	<li ng-repeat="answer in model.answers">
-		<div ng-bind-html="answer.body"></div>
-		<a href="{{answer.owner.link}}" target="_blank">
-			{{model.owner.displayName}} {{model.owner.reputation}}
-			<img ng-src="{{answer.owner.profile_image}}"/>
-		</a>
-	</li>
-</ul>
+<div class="page-header">
+	<h2>Answers</h2>
+</div>
+
+<div class="row">
+	<div class="col-md-12 question-box" ng-repeat="item in model.answers">
+		<div class="row">
+			<div class="col-md-1 align-center">
+				<h4>
+					{{item.up_vote_count}}<br/>
+					votes
+				</h4>
+				<h6>
+					{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
+				</h6>
+			</div>
+			<div class="col-md-11 question-box-interior">
+				<div ng-bind-html="item.body"></div>
+				<h4>
+					<span class="label label-default tag" ng-repeat="tag in item.tags">
+						{{tag}}
+					</span>
+				</h4>
+				<div class="row">
+					<div class="col-md-1">
+						<img class="img-thumbnail" ng-src="{{item.owner.profile_image}}"/>
+					</div>
+					<div class="col-md-11">
+						<a href="{{item.owner.link}}" target="_blank">
+							{{item.owner.display_name}} {{item.owner.reputation}}
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

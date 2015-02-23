@@ -15,7 +15,7 @@
 				answers
 			</div>
 			<div class="col-md-10 question-box-interior">
-				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date}}</h4></a>
+				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}</h4></a>
 				<h4>
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}

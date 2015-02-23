@@ -11,7 +11,7 @@
 	</div>
 	<div class="col-md-4">
 		<h4>Level {{model.reputation}}</h4>
-		member since {{model.creation_date}}<br/>
+		member since {{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}<br/>
 		{{model.website_url}}<br/>
 	</div>
 	<div class="col-md-4">
@@ -34,9 +34,9 @@
 </div>
 
 <div class="row">
-	<div class="col-md-2" ng-repeat="item in timeline">
+	<div class="col-md-2 align-center" ng-repeat="item in timeline">
 		<h4>{{item.timeline_type}}</h4>
-		{{item.creation_date}}
+		{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 		<p>
 			{{item.title}}
 			{{item.detail}}
@@ -60,7 +60,7 @@
 				answers
 			</div>
 			<div class="col-md-10 question-box-interior">
-				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date}}</h4></a>
+				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}</h4></a>
 				<h4>
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}
