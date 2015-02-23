@@ -47,9 +47,6 @@
 					{{item.up_vote_count}}<br/>
 					votes
 				</h4>
-				<h6>
-					{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
-				</h6>
 			</div>
 			<div class="col-md-11 question-box-interior">
 				<div ng-bind-html="item.body"></div>
@@ -66,6 +63,7 @@
 						<a href="{{item.owner.link}}" target="_blank">
 							{{item.owner.display_name}} {{item.owner.reputation}}
 						</a>
+						{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 					</div>
 				</div>
 			</div>

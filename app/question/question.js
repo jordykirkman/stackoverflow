@@ -32,6 +32,9 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 						question.answers.forEach(function(answer){
 							answer.body = $sce.trustAsHtml(answer.body);
 						});
+						question.comments.forEach(function(comment){
+							comment.body = $sce.trustAsHtml(comment.body);
+						});
 						return question;
 					} else {
 						return JSON.parse(data);
