@@ -2,8 +2,26 @@
 <input ng-model="searchTags"  placeholder="tags"/>
 <input ng-model="searchNotTags"  placeholder="not tagged"/>
 <button ng-click="search()">search</button>
-<ul>
-	<li ng-repeat="question in model">
-		<a href="#/question/{{question.question_id}}">{{question.title}}</a>
-	</li>
-</ul>
+
+<div class="row">
+	<div class="col-md-12 question-box" ng-repeat="item in model">
+		<div class="row">
+			<div class="col-md-1 align-center">
+				{{item.up_vote_count}}<br/>
+				vote
+			</div>
+			<div class="col-md-1 align-center">
+				{{item.answer_count}}<br/>
+				answers
+			</div>
+			<div class="col-md-10 question-box-interior">
+				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date}}</h4></a>
+				<h4>
+					<span class="label label-default tag" ng-repeat="tag in item.tags">
+						{{tag}}
+					</span>
+				</h4>
+			</div>
+		</div>
+	</div>
+</div>
