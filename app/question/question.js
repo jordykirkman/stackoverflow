@@ -14,6 +14,7 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope, $sce){
 		return $resource('https://api.stackexchange.com/2.2/questions/:question_id', {}, {
 			query: {
+				cache: true,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
@@ -29,12 +30,16 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 						var question = JSON.parse(data).items[0];
 						// we need angular to allow these strings to be read as html
 						question.body = $sce.trustAsHtml(question.body);
-						question.answers.forEach(function(answer){
-							answer.body = $sce.trustAsHtml(answer.body);
-						});
-						question.comments.forEach(function(comment){
-							comment.body = $sce.trustAsHtml(comment.body);
-						});
+						if(question.answers){
+							question.answers.forEach(function(answer){
+								answer.body = $sce.trustAsHtml(answer.body);
+							});
+						}
+						if(question.comments){
+							question.comments.forEach(function(comment){
+								comment.body = $sce.trustAsHtml(comment.body);
+							});
+						}
 						return question;
 					} else {
 						return JSON.parse(data);
@@ -45,9 +50,8 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 	}
 ])
 
-.controller('QuestionController', ['Question', '$scope', '$routeParams', '$rootScope', '$http', function(Question, $scope, $routeParams, $rootScope, $http) {
+.controller('QuestionController', ['Question', '$scope', '$routeParams', '$rootScope', '$http', '$q', function(Question, $scope, $routeParams, $rootScope, $http, $q) {
 
-	// fetch the the current user and set it as the model
 	$scope.model = Question.query({question_id: $routeParams.question_id});
 
 }]);

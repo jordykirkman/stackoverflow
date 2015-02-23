@@ -14,6 +14,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope){
 		return $resource('https://api.stackexchange.com/2.2/me', {}, {
 			query: {
+				cache: true,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
@@ -43,6 +44,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope){
 		return $resource('https://api.stackexchange.com/2.2/me/timeline', {}, {
 			query: {
+				cache: true,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
@@ -69,6 +71,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope){
 		return $resource('https://api.stackexchange.com/2.2/me/badges', {}, {
 			query: {
+				cache: true,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
@@ -94,6 +97,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope){
 		return $resource('https://api.stackexchange.com/2.2/me/tags', {}, {
 			query: {
+				cache: true,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
@@ -118,6 +122,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope){
 		return $resource('https://api.stackexchange.com/2.2/me/favorites', {}, {
 			query: {
+				cache: true,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
@@ -142,12 +147,16 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function(User, Timeline, Badges, Tags, Favorites, $scope, $routeParams, $rootScope, $http, $location) {
 
 	// clear the hash from the oath
-	$location.hash('');
+	// $location.hash('');
 
-	$scope.model = User.query();
-	$scope.timeline = Timeline.query();
-	$scope.badges = Badges.query();
-	$scope.tags = Tags.query();
-	$scope.favorites = Favorites.query();
+	// fetch our models
+	var me = User.query();
+	
+	$rootScope.me = 		me;
+	$scope.model = 			me;
+	$scope.timeline = 		Timeline.query();
+	$scope.badges =			Badges.query();
+	$scope.tags = 			Tags.query();
+	$scope.favorites = 		Favorites.query();
 
 }]);
