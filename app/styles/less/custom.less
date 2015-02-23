@@ -57,6 +57,16 @@ input {
 nav.navbar {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  > li {
+    border-left: solid 1px #414042;
+  }
+  > li:last-child {
+    border: none;
+  }
+}
+
+.glyphicon.success {
+  color: @brand-success;
 }
 
 .question-box {
@@ -68,6 +78,9 @@ nav.navbar {
     background-color: #24364b;
     padding: 1em;
   }
+}
+.question-box.success-border {
+  border: solid 1px @brand-success;
 }
 
 .label {

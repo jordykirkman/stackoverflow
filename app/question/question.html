@@ -40,11 +40,10 @@
 </div>
 
 <div class="row">
-	<div class="col-md-12 question-box" ng-repeat="item in model.answers">
+	<div ng-class="{'success-border':item.is_accepted}" class="col-md-12 question-box" ng-repeat="item in model.answers">
 		<div class="row">
 			<div class="col-md-1 align-center">
-				<h4 ng-show="accepted" class="ng-hide">
-				</h4>
+				<h3><span class="glyphicon glyphicon-ok success" ng-show="item.is_accepted" class="ng-hide"></span></h3>
 				<h4>
 					{{item.up_vote_count}}<br/>
 					votes
