@@ -20,21 +20,23 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 <div class="container">
-  
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="#/user">Profile</a></li>
-          <li><a href="#/search">Search</a></li>
-        </ul>
-      </div>
+  <div class="row">
+    <div class="col-md-6">
     </div>
-  </nav>
-
+    <div class="col-md-6">
+      <nav class="navbar navbar-default">
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#/user">Profile</a></li>
+            <li><a href="#/search">Search</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
   <div ng-view>
   </div>
-  
+
 </div>
 
   <!-- In production use:
