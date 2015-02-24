@@ -6608,6 +6608,19 @@ nav.navbar > li:last-child {
 .question-box.success-border {
   border: solid 1px #5cb85c;
 }
+.dropdown button {
+  width: 100%;
+}
+.dropdown ul.dropdown-menu {
+  margin: 0;
+  width: 100%;
+}
+.dropdown ul.dropdown-menu > li {
+  cursor: pointer;
+}
+.dropdown:hover ul.dropdown-menu {
+  display: block;
+}
 .word-cloud {
   text-align: center;
 }

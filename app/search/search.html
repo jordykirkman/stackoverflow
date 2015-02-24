@@ -4,10 +4,36 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<input ng-model="searchTitle" placeholder="search in title"/>
-		<input ng-model="searchTags"  placeholder="tags"/>
-		<input ng-model="searchNotTags"  placeholder="not tagged"/>
-		<button class="btn btn-primary" ng-click="search()">search</button>
+		<div class="row">
+			<div class="col-md-12">
+				<input class="form-control" type="text" ng-model="searchTitle" placeholder="search in title"/>
+			</div>
+			<div class="col-md-6">
+				<input class="form-control" type="text" ng-model="searchTags"  placeholder="tags"/>
+			</div>
+			<div class="col-md-6">
+				<input class="form-control" type="text" ng-model="searchNotTags"  placeholder="not tagged"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						Order by {{questionFilter.name}}
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<li role="presentation" ng-repeat="filter in filterOptions">
+							<a role="menuitem" tabindex="-1" ng-click="changeFilter(filter)">{{filter.name}}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-primary" ng-click="search()">search</button>
+			</div>
+		</div>
+
 	</div>
 	<div class="col-md-6">
 		<div class="word-cloud">
@@ -21,7 +47,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-12 question-box" ng-repeat="item in model.items">
+	<div class="col-md-12 question-box" ng-repeat="item in model.items | orderBy: questionFilter.value:true">
 		<div class="row">
 			<div class="col-md-1 align-center">
 				{{item.up_vote_count}}<br/>
@@ -32,11 +58,12 @@
 				answers
 			</div>
 			<div class="col-md-10 question-box-interior">
-				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}</h4></a>
+				<a href="#/question/{{item.question_id}}"><h4><span class="glyphicon glyphicon-ok" ng-show="item.is_answered" class="ng-hide"></span> {{item.title}}</h4></a>
 				<h4>
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}
 					</span>
+					{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 				</h4>
 			</div>
 		</div>

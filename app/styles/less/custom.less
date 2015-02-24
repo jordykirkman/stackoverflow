@@ -85,6 +85,22 @@ nav.navbar {
 .question-box.success-border {
   border: solid 1px @brand-success;
 }
+ 
+.dropdown {
+  button {
+    width: 100%
+  }
+  ul.dropdown-menu {
+    margin: 0;
+    width: 100%;
+    > li {
+      cursor: pointer;
+    }
+  }
+}
+.dropdown:hover ul.dropdown-menu {
+  display: block;
+}
 
 .word-cloud {
   text-align: center;

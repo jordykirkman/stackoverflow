@@ -54,6 +54,17 @@ angular.module('app.search', ['ngRoute'])
 
 .controller('SearchController', ['Search', '$scope', '$rootScope', '$http', function(Search, $scope, $rootScope, $http) {
 
+	$scope.filterOptions = [
+		{name: 'Relevence', value: null},
+		{name: 'Votes', value: 'up_vote_count'},
+		{name: 'Answers', value: 'answer_count'},
+		{name: 'Is Answered', value: 'is_answered'}
+	];
+
+	$scope.changeFilter = function(filter){
+		$scope.questionFilter = filter;
+	}
+
 	$scope.searchTitle = null;
 	$scope.searchTags = null;
 	$scope.searchNotTags = null;
