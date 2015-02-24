@@ -65,7 +65,7 @@
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}
 					</span>
-					{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
+					{{item.view_count}} since {{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 				</h4>
 			</div>
 		</div>
