@@ -14,11 +14,36 @@ angular.module('app.search', ['ngRoute'])
 	return $resource('https://api.stackexchange.com/2.2/search/', {}, {
 		query: {
 			method:'GET',
-			isArray:true,
+			isArray:false,
 			// strip out of root key and just return the array
 			transformResponse: function(data){
 				if(JSON.parse(data).items){
-					return JSON.parse(data).items;
+					var questionList = JSON.parse(data);
+					// find the largest tag count, this is used in our word cloud
+					questionList.largestTagCount = 0;
+					questionList.tags = [];
+					questionList.tagObjects = [];
+
+					// using recursion to create a unique set of tag objects that contain their own quantity
+					questionList.items.forEach(function(question){
+						question.tags.forEach(function(tag){
+							var tagObj = {name: tag, count: 1};
+							if(questionList.tags.indexOf(tag) == -1){
+								questionList.tags.push(tag);
+								questionList.tagObjects.push({name: tag, count: 1});
+							} else {
+								questionList.tagObjects.forEach(function(obj){
+									if(obj.name === tag){
+										obj.count += 1;
+										if(obj.count + 1 > questionList.largestTagCount){
+											questionList.largestTagCount = obj.count + 1;
+										}
+									}
+								});
+							}
+						});
+					});
+					return questionList;
 				} else {
 					return JSON.parse(data);
 				}

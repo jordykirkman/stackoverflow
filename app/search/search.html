@@ -1,10 +1,21 @@
-<input ng-model="searchTitle" placeholder="search in title"/>
-<input ng-model="searchTags"  placeholder="tags"/>
-<input ng-model="searchNotTags"  placeholder="not tagged"/>
-<button class="btn btn-primary" ng-click="search()">search</button>
-
 <div class="row">
-	<div class="col-md-12 question-box" ng-repeat="item in model">
+	<div class="col-md-8">
+		<input ng-model="searchTitle" placeholder="search in title"/>
+		<input ng-model="searchTags"  placeholder="tags"/>
+		<input ng-model="searchNotTags"  placeholder="not tagged"/>
+		<button class="btn btn-primary" ng-click="search()">search</button>
+	</div>
+	<div class="col-md-4">
+		<h4>Activity tags</h4>
+		<div class="word-cloud">
+
+			<span class="cloud-item" ng-repeat="tag in model.tagObjects | orderBy:'name'" ng-style="{'font-size': (((100 / model.largestTagCount) * tag.count) / 80) + 1 + 'em'}">{{tag.name}}</span>
+		</div>
+		<a ng-click="searchTags()"><h6>Search similar</h6></a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 question-box" ng-repeat="item in model.items">
 		<div class="row">
 			<div class="col-md-1 align-center">
 				{{item.up_vote_count}}<br/>
