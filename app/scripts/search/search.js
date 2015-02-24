@@ -64,15 +64,23 @@ angular.module('app.search', ['ngRoute'])
 
 	// check the auto search flag
 	if($rootScope.autoSearch){
+		$scope.pages = 1;
+		$scope.searchTags = $rootScope.tags.tagList;
+		$rootScope.autoSearch = false;
 		$scope.model = Search.query({
 			tagged: $rootScope.tags.tagList,
 			access_token: $rootScope.access_token,
+			pagesize: 30,
 			key: '6S9zu7acV8JdHBn473Q6yw((',
 			filter: "!tRhd)msKfDI_kdNs2zdw2HVvoAIWUBj",
 			site: 'stackoverflow'
+		}, function(data){
+			$scope.largestTagCount = data.largestTagCount;
+			$scope.tags = data.tags;
+			$scope.tagObjects = data.tagObjects;
+			$scope.hasMore = data.has_more;
+			$scope.model = data.items;
 		});
-		$scope.searchTags = $rootScope.tags.tagList;
-		$rootScope.autoSearch = false;
 	}
 
 	// predefined options for the filter dropdown
