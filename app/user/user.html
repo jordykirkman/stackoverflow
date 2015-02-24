@@ -14,7 +14,12 @@
 		member since {{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}<br/>
 		{{model.website_url}}<br/>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 align-center">
+		<h4>Activity tags</h4>
+		<div class="word-cloud">
+			<span class="cloud-item" ng-repeat="tag in tags.items | orderBy:'name'" ng-style="{'font-size': (((100 / tags.largestCount) * tag.count) / 30) + .75 + 'em'}">{{tag.name}}</span>
+		</div>
+		<a ng-click="searchTags()"><h6>Search similar</h6></a>
 	</div>
 
 </div>

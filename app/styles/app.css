@@ -6597,8 +6597,23 @@ nav.navbar > li:last-child {
   background-color: #24364b;
   padding: 1em;
 }
+.question-box .question-box-interior h1,
+.question-box .question-box-interior h2,
+.question-box .question-box-interior h3,
+.question-box .question-box-interior h4,
+.question-box .question-box-interior h5,
+.question-box .question-box-interior h6 {
+  margin-top: 0;
+}
 .question-box.success-border {
   border: solid 1px #5cb85c;
+}
+.word-cloud {
+  text-align: center;
+}
+.word-cloud .cloud-item {
+  margin: 0 5px;
+  display: inline-block;
 }
 .label {
   border-radius: 0;
