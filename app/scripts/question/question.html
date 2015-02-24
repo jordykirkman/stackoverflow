@@ -16,7 +16,7 @@
 			<span class="glyphicon glyphicon-heart btn" ng-class="{'pink':model.favorited}" ng-click="favorite(model.favorited)"></span>
 			{{model.title}}
 		</h3>
-		<div ng-bind-html="model.body"></div>
+		<p ng-bind-html="model.body"></p>
 		<h4>
 			<span class="label label-default tag" ng-repeat="tag in model.tags">
 				{{tag}}
@@ -54,7 +54,7 @@
 				</h4>
 			</div>
 			<div class="col-md-11 question-box-interior">
-				<div ng-bind-html="item.body"></div>
+				<p ng-bind-html="item.body"></p>
 				<h4>
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}
