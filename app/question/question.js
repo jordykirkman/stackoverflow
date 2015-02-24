@@ -48,7 +48,7 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 			update: {
 				method:'POST',
 				url: 'https://api.stackexchange.com/2.2/questions/:question_id/favorite',
-				params:{
+				data:{
 					access_token: $rootScope.access_token,
 					key: '6S9zu7acV8JdHBn473Q6yw((',
 					filter: '!9YdnS9*GS',
