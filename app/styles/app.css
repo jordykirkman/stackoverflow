@@ -6600,6 +6600,13 @@ nav.navbar > li:last-child {
 .question-box.success-border {
   border: solid 1px #5cb85c;
 }
+.word-cloud {
+  text-align: center;
+}
+.word-cloud .cloud-item {
+  margin: 0 5px;
+  display: inline-block;
+}
 .label {
   border-radius: 0;
   color: #00c3ff;

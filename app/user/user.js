@@ -102,12 +102,21 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 				params:{
 					access_token: $rootScope.access_token,
 					key: '6S9zu7acV8JdHBn473Q6yw((',
+					filter: '!9YdnSQVoS',
 					site: 'stackoverflow'
 				},
-				isArray:true,
+				isArray:false,
 				transformResponse: function(data){
 					if(JSON.parse(data).items){
-						return JSON.parse(data).items;
+						var tags = JSON.parse(data);
+						// find the largest tag count, this is used in our word cloud
+						tags.largestCount = 0;
+						tags.items.forEach(function(tag){
+							if(tag.count > tags.largestCount){
+								tags.largestCount = tag.count;
+							}
+						});
+						return tags;
 					} else {
 						return JSON.parse(data);
 					}
@@ -145,9 +154,6 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 
 .controller('UserController', ['User', 'Timeline', 'Badges', 'Tags', 'Favorites', '$scope', '$routeParams', '$rootScope', '$http', '$location',
 	function(User, Timeline, Badges, Tags, Favorites, $scope, $routeParams, $rootScope, $http, $location) {
-
-	// clear the hash from the oath
-	// $location.hash('');
 
 	// fetch our models
 	var me = User.query();
