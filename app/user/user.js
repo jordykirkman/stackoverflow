@@ -111,7 +111,9 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 						var tags = JSON.parse(data);
 						// find the largest tag count, this is used in our word cloud
 						tags.largestCount = 0;
+						tags.tagList = [];
 						tags.items.forEach(function(tag){
+							tags.tagList.push(tag.name);
 							if(tag.count > tags.largestCount){
 								tags.largestCount = tag.count;
 							}
@@ -156,13 +158,20 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function(User, Timeline, Badges, Tags, Favorites, $scope, $routeParams, $rootScope, $http, $location) {
 
 	// fetch our models
-	var me = User.query();
+	var me = 				User.query();
+	var tags = 				Tags.query();
 	
 	$rootScope.me = 		me;
 	$scope.model = 			me;
 	$scope.timeline = 		Timeline.query();
 	$scope.badges =			Badges.query();
-	$scope.tags = 			Tags.query();
+	$scope.tags = 			tags;
+	$rootScope.tags = 		tags;
 	$scope.favorites = 		Favorites.query();
+
+	$scope.searchTags = function(){
+		$rootScope.autoSearch = true;
+		$location.path('/search');
+	}
 
 }]);

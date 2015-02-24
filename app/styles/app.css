@@ -6562,6 +6562,7 @@ h5,
 h6 {
   font-family: 'lato', 'Arial', 'Helvetica', sans-serif;
   font-weight: lighter;
+  text-shadow: 1px 1px 2px #000000;
 }
 body {
   background-image: url("../images/bnet-background.jpg");
@@ -6603,7 +6604,22 @@ nav.navbar > li:last-child {
 .question-box .question-box-interior h4,
 .question-box .question-box-interior h5,
 .question-box .question-box-interior h6 {
-  margin-top: 0;
+  margin: 0;
+}
+.question-box .question-box-interior h1.title,
+.question-box .question-box-interior h2.title,
+.question-box .question-box-interior h3.title,
+.question-box .question-box-interior h4.title,
+.question-box .question-box-interior h5.title,
+.question-box .question-box-interior h6.title {
+  color: #fff;
+  margin-bottom: .6em;
+}
+.question-box .results-quickinfo {
+  margin-top: 1.33em;
+}
+.question-box .results-quickinfo:first-child {
+  border-right: solid 1px #fff;
 }
 .question-box.success-border {
   border: solid 1px #5cb85c;
@@ -6631,9 +6647,11 @@ nav.navbar > li:last-child {
 .label {
   border-radius: 0;
   color: #00c3ff;
+  border: solid 1px #333333;
 }
 .label.tag {
   margin-right: 0.6em;
+  text-shadow: 1px 1px 2px #002733;
 }
 .align-center {
   text-align: center;

@@ -14,6 +14,7 @@ angular.module('app.search', ['ngRoute'])
 	return $resource('https://api.stackexchange.com/2.2/search/', {}, {
 		query: {
 			method:'GET',
+			cache: true,
 			isArray:false,
 			// strip out of root key and just return the array
 			transformResponse: function(data){
@@ -54,6 +55,27 @@ angular.module('app.search', ['ngRoute'])
 
 .controller('SearchController', ['Search', '$scope', '$rootScope', '$http', function(Search, $scope, $rootScope, $http) {
 
+	// default values
+	$scope.searchTitle = null;
+	$scope.searchTags = null;
+	$scope.searchNotTags = null;
+
+	$scope.model = [];
+
+	// check the auto search flag
+	if($rootScope.autoSearch){
+		$scope.model = Search.query({
+			tagged: $rootScope.tags.tagList,
+			access_token: $rootScope.access_token,
+			key: '6S9zu7acV8JdHBn473Q6yw((',
+			filter: "!tRhd)msKfDI_kdNs2zdw2HVvoAIWUBj",
+			site: 'stackoverflow'
+		});
+		$scope.searchTags = $rootScope.tags.tagList;
+		$rootScope.autoSearch = false;
+	}
+
+	// predefined options for the filter dropdown
 	$scope.filterOptions = [
 		{name: 'Relevence', value: null},
 		{name: 'Votes', value: 'up_vote_count'},
@@ -61,25 +83,38 @@ angular.module('app.search', ['ngRoute'])
 		{name: 'Is Answered', value: 'is_answered'}
 	];
 
+	// trigger a change to the filter with a filter object
 	$scope.changeFilter = function(filter){
 		$scope.questionFilter = filter;
 	}
 
-	$scope.searchTitle = null;
-	$scope.searchTags = null;
-	$scope.searchNotTags = null;
-	$scope.model = [];
-
 	// search function performs a query with the criteria and parameters
-	$scope.search = function(){
-		$scope.model = Search.query({
+	// more param is a bool to see if this is a new search, or pressing the "more" button
+	$scope.search = function(more){
+		if(more){
+			$scope.pages += 1;
+		} else {
+			$scope.pages = 1;
+			$scope.model = [];
+		}
+		Search.query({
 			intitle: $scope.searchTitle,
 			tagged: $scope.searchTags,
 			nottagged: $scope.searchNotTags,
 			access_token: $rootScope.access_token,
+			pagesize: 30,
+			page: $scope.pages,
 			key: '6S9zu7acV8JdHBn473Q6yw((',
 			filter: "!tRhd)msKfDI_kdNs2zdw2HVvoAIWUBj",
 			site: 'stackoverflow'
+		}, function(data){
+			$scope.largestTagCount = data.largestTagCount;
+			$scope.tags = data.tags;
+			$scope.tagObjects = data.tagObjects;
+			$scope.hasMore = data.has_more;
+			data.items.forEach(function(item){
+				$scope.model.push(item);
+			});
 		});
 	}
 

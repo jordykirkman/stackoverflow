@@ -4,12 +4,10 @@
 			<div class="col-m-12 align-center">
 				<img ng-src="{{model.profile_image}}"/>
 			</div>
-			<div class="col-m-12 align-center">
-				<h4>{{model.display_name}}</h4>
-			</div>
 		</div>
 	</div>
 	<div class="col-md-4">
+		<h3>{{model.display_name}}</h3>
 		<h4>Level {{model.reputation}}</h4>
 		member since {{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}<br/>
 		{{model.website_url}}<br/>
@@ -19,7 +17,7 @@
 		<div class="word-cloud">
 			<span class="cloud-item" ng-repeat="tag in tags.items | orderBy:'name'" ng-style="{'font-size': (((100 / tags.largestCount) * tag.count) / 30) + .75 + 'em'}">{{tag.name}}</span>
 		</div>
-		<a ng-click="searchTags()"><h6>Search similar</h6></a>
+		<button class="btn btn-sm btn-default" ng-click="searchTags()">Search similar</button>
 	</div>
 
 </div>
@@ -56,20 +54,21 @@
 <div class="row">
 	<div class="col-md-12 question-box" ng-repeat="item in favorites">
 		<div class="row">
-			<div class="col-md-1 align-center">
+			<div class="col-md-1 align-center results-quickinfo">
 				{{item.up_vote_count}}<br/>
 				vote
 			</div>
-			<div class="col-md-1 align-center">
+			<div class="col-md-1 align-center results-quickinfo">
 				{{item.answer_count}}<br/>
 				answers
 			</div>
 			<div class="col-md-10 question-box-interior">
-				<a href="#/question/{{item.question_id}}"><h4>{{item.title}} {{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}</h4></a>
+				<a href="#/question/{{item.question_id}}"><h4 class="title">{{item.title}}</h4></a>
 				<h4>
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}
 					</span>
+					{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 				</h4>
 			</div>
 		</div>

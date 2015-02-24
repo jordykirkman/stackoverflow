@@ -33,10 +33,14 @@
     font-weight: lighter;
     font-style: normal;
 }
+.shadow(@color) {
+  text-shadow: 1px 1px 2px darken(@color, 40%);
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'lato', 'Arial', 'Helvetica', sans-serif;
   font-weight: lighter;
+  .shadow(@gray);
 }
 
 body {
@@ -78,8 +82,18 @@ nav.navbar {
     background-color: #24364b;
     padding: 1em;
     h1, h2, h3, h4, h5, h6 {
-      margin-top: 0;
+      margin: 0;
     }
+    h1.title, h2.title, h3.title, h4.title, h5.title, h6.title {
+      color: #fff;
+      margin-bottom: .6em;
+    }
+  }
+  .results-quickinfo {
+    margin-top: 1.33em;
+  }
+  .results-quickinfo:first-child {
+    border-right: solid 1px #fff;
   }
 }
 .question-box.success-border {
@@ -113,9 +127,11 @@ nav.navbar {
 .label {
   border-radius: 0;
   color: @brand-primary;
+  border: solid 1px @gray-dark;
 }
 .label.tag {
   margin-right: 0.6em;
+  .shadow(@brand-primary);
 }
 
 .align-center {

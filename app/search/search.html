@@ -8,14 +8,14 @@
 			<div class="col-md-12">
 				<input class="form-control" type="text" ng-model="searchTitle" placeholder="search in title"/>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<input class="form-control" type="text" ng-model="searchTags"  placeholder="tags"/>
-			</div>
-			<div class="col-md-6">
-				<input class="form-control" type="text" ng-model="searchNotTags"  placeholder="not tagged"/>
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-md-6">
+				<input class="form-control" type="text" ng-model="searchNotTags"  placeholder="not tagged"/>
+			</div>
 			<div class="col-md-6">
 				<div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -29,7 +29,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-6">
+		</div>
+		<div class="row">
+			<div class="col-md-12">
 				<button class="btn btn-primary" ng-click="search()">search</button>
 			</div>
 		</div>
@@ -37,28 +39,28 @@
 	</div>
 	<div class="col-md-6">
 		<div class="word-cloud">
-			<span class="cloud-item" ng-repeat="tag in model.tagObjects | orderBy:'name'" ng-style="{'font-size': (((100 / model.largestTagCount) * tag.count) / 30) + .75 + 'em'}">{{tag.name}}</span>
+			<span class="cloud-item" ng-repeat="tag in tagObjects | orderBy:'name'" ng-style="{'font-size': (((100 / largestTagCount) * tag.count) / 30) + .75 + 'em'}">{{tag.name}}</span>
 		</div>
 	</div>
 </div>
 
-<div ng-show="model" class="ng-hide page-header">
+<div ng-show="pages" class="ng-hide page-header">
 	<h2>Results</h2>
 </div>
 
 <div class="row">
-	<div class="col-md-12 question-box" ng-repeat="item in model.items | orderBy: questionFilter.value:true">
+	<div class="col-md-12 question-box" ng-repeat="item in model | orderBy: questionFilter.value:true">
 		<div class="row">
-			<div class="col-md-1 align-center">
+			<div class="col-md-1 align-center results-quickinfo">
 				{{item.up_vote_count}}<br/>
 				vote
 			</div>
-			<div class="col-md-1 align-center">
+			<div class="col-md-1 align-center results-quickinfo">
 				{{item.answer_count}}<br/>
 				answers
 			</div>
 			<div class="col-md-10 question-box-interior">
-				<a href="#/question/{{item.question_id}}"><h4><span class="glyphicon glyphicon-ok" ng-show="item.is_answered" class="ng-hide"></span> {{item.title}}</h4></a>
+				<a href="#/question/{{item.question_id}}"><h4 class="title"><span class="glyphicon glyphicon-ok" ng-show="item.is_answered" class="ng-hide"></span> {{item.title}}</h4></a>
 				<h4>
 					<span class="label label-default tag" ng-repeat="tag in item.tags">
 						{{tag}}
@@ -69,3 +71,5 @@
 		</div>
 	</div>
 </div>
+
+<button class="btn btn-default" ng-show="hasMore" class="ng-hide" ng-click="search(true)">More</button>
