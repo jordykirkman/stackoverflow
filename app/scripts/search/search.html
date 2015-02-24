@@ -44,12 +44,12 @@
 	</div>
 </div>
 
-<div ng-show="pages" class="ng-hide page-header">
+<div ng-show="pages" class="ng-hide page-header animated fadeIn">
 	<h2>Results</h2>
 </div>
 
 <div class="row">
-	<div class="col-md-12 question-box" ng-repeat="item in model | orderBy: questionFilter.value:true">
+	<div class="col-md-12 question-box animated fadeIn" ng-repeat="item in model | orderBy: questionFilter.value:true">
 		<div class="row">
 			<div class="col-md-1 align-center results-quickinfo">
 				{{item.up_vote_count}}<br/>
