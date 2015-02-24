@@ -11,6 +11,10 @@ angular.module('app.login', ['ngRoute'])
 
 .controller('LoginController', ['$scope', '$location', '$rootScope', function($scope, $location, $rootScope) {
 
+	if(typeof(Storage) !== 'undefined') {
+		localStorage.removeItem('access_token');
+	}
+
 	// checks to see if stackoverflow oath put an access token in the url
 	if($location.hash()){
 		var token = $location.hash().split('&')[0].split('=')[1];

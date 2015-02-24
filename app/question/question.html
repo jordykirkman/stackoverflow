@@ -11,7 +11,11 @@
 				</a>
 			</div>
 		</div>
-		<h3>{{model.title}}</h3>
+		<h3>
+			<span class="glyphicon glyphicon-heart" ng-hide="model.favorited" ng-class="model.favorited" ng-click="favorite()">fav</span>
+			<span class="glyphicon glyphicon-heart ng-hide" ng-show="model.favorited" ng-click="unfavorite()">go</span>
+			{{model.title}}
+		</h3>
 		<div ng-bind-html="model.body"></div>
 		<h4>
 			<span class="label label-default tag" ng-repeat="tag in model.tags">
