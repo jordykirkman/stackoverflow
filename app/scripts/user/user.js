@@ -4,7 +4,7 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 
 .config(['$routeProvider', function($routeProvider, $routeParams) {
   $routeProvider.when('/user/', {
-    templateUrl: 'user/user.html',
+    templateUrl: 'scripts/user/user.html',
     controller: 'UserController'
   });
 }])

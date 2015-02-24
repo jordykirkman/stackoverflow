@@ -4,7 +4,7 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/question/:question_id', {
-    templateUrl: 'question/question.html',
+    templateUrl: 'scripts/question/question.html',
     controller: 'QuestionController'
   });
 }])
