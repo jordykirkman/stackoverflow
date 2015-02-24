@@ -28,10 +28,11 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li>
-              <img class="img-icon" ng-src="{{me.profile_image}}?s=50&g=1"/>
+              <img class="img-icon" ng-src="{{me.profile_image}}?s=50&g=1" ng-show="me" class="ng-hide"/>
             </li>
             <li>
-              <a href="#/user">Hi, {{me.display_name}}.</a>
+              <a href="#/user" ng-show="me" class="ng-hide">Hi, {{me.display_name}}.</a>
+              <a href="#/user" ng-hide="me">Profile</a>
             </li>
             <li><a href="#/search">Search</a></li>
           </ul>

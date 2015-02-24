@@ -13,8 +13,14 @@ angular.module('app.login', ['ngRoute'])
 
 	// checks to see if stackoverflow oath put an access token in the url
 	if($location.hash()){
-		$rootScope.access_token = $location.hash().split('&')[0].split('=')[1];
+		var token = $location.hash().split('&')[0].split('=')[1];
+		$rootScope.access_token = token;
 		$location.path('/user/').hash('');
+
+		// if the browser allows sessionStorage, lets put the user's session token in it
+		if(typeof(Storage) !== 'undefined') {
+			localStorage.setItem('access_token', token);
+		}
 	}
 
 }]);
