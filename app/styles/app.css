@@ -6589,10 +6589,19 @@ nav.navbar > li:last-child {
 .glyphicon.success {
   color: #5cb85c;
 }
+.glyphicon.pink {
+  color: #bf7cc1;
+}
+.glyphicon.btn {
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+}
 .question-box {
   background-color: #425366;
   border: solid 1px #425366;
   margin-bottom: 2em;
+  box-shadow: 0 1px 3px #000000;
 }
 .question-box .question-box-interior {
   background-color: #24364b;

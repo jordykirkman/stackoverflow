@@ -19,7 +19,7 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 				params:{
 					access_token: $rootScope.access_token,
 					key: '6S9zu7acV8JdHBn473Q6yw((',
-					filter: "!7nKVHb)f*..yPcnXlQ8UL(pqZL)4vOU-Sf",
+					filter: "!*da(x.F_qTZ.tR-BMlqkdVklQpJvnP8*ftjUY",
 					site: 'stackoverflow'
 				},
 				isArray:false,
@@ -45,10 +45,10 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 					}
 				}
 			},
-			update: {
+			save: {
 				method:'POST',
 				url: 'https://api.stackexchange.com/2.2/questions/:question_id/favorite',
-				data:{
+				params:{
 					access_token: $rootScope.access_token,
 					key: '6S9zu7acV8JdHBn473Q6yw((',
 					filter: '!9YdnS9*GS',
@@ -85,8 +85,29 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 
 	$scope.model = Question.query({question_id: $routeParams.question_id});
 
-	$scope.favorite = function(){
-		Question.update({question_id: $routeParams.question_id});
+	// undo param toggles the endpoint to have "undo" at the end,
+	//this is how stackoverflow undoes simple actions
+	$scope.favorite = function(undo){
+		undo = undo === true ? '/undo' : '';
+		// Angular really doesnt seem to like some of the non-standard quirks of the stackoverflow api
+		// to favorit a question, it requires params to be passed as a form in place of any data to be posted
+		// using ajax here because $resource and $http norms dont work/are rejected by api
+		jQuery.ajax({
+		    url: 'https://api.stackexchange.com/2.2/questions/' + $routeParams.question_id + '/favorite' + undo,
+		    data: {
+				access_token: $rootScope.access_token,
+				key: '6S9zu7acV8JdHBn473Q6yw((',
+				filter: '!9YdnS9*GS',
+				site: 'stackoverflow'
+			},
+			type:'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			success: function(msg) {
+				console.log(msg);
+			}
+		});
 	}
 
 }]);

@@ -33,14 +33,17 @@
     font-weight: lighter;
     font-style: normal;
 }
-.shadow(@color) {
+.textshadow(@color) {
   text-shadow: 1px 1px 2px darken(@color, 40%);
+}
+.boxshadow(@color) {
+  box-shadow: 0 1px 3px darken(@color, 40%);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'lato', 'Arial', 'Helvetica', sans-serif;
   font-weight: lighter;
-  .shadow(@gray);
+  .textshadow(@gray);
 }
 
 body {
@@ -72,12 +75,20 @@ nav.navbar {
 .glyphicon.success {
   color: @brand-success;
 }
+.glyphicon.pink {
+  color: @pink;
+}
+.glyphicon.btn {
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+}
 
 .question-box {
   background-color: #425366;
   border: solid 1px #425366;
   margin-bottom: 2em;
-  .shadow(@gray-darker);
+  .boxshadow(@gray-darker);
 
   .question-box-interior {
     background-color: #24364b;
@@ -132,7 +143,7 @@ nav.navbar {
 }
 .label.tag {
   margin-right: 0.6em;
-  .shadow(@brand-primary);
+  .textshadow(@brand-primary);
 }
 
 .align-center {

@@ -12,8 +12,7 @@
 			</div>
 		</div>
 		<h3>
-			<span class="glyphicon glyphicon-heart" ng-hide="model.favorited" ng-class="model.favorited" ng-click="favorite()">fav</span>
-			<span class="glyphicon glyphicon-heart ng-hide" ng-show="model.favorited" ng-click="unfavorite()">go</span>
+			<span class="glyphicon glyphicon-heart btn" ng-class="{'pink':model.favorited}" ng-click="favorite(model.favorited)"></span>
 			{{model.title}}
 		</h3>
 		<div ng-bind-html="model.body"></div>
