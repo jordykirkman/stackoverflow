@@ -8,8 +8,8 @@
 			<div class="col-md-11">
 				<a href="{{owner.link}}" target="_blank">
 					{{model.owner.display_name}} {{model.owner.reputation}}<br/>
-					{{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 				</a>
+				asked {{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}
 			</div>
 		</div>
 		<h3>
@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<h5>Comments</h5>
+<h5 class="ng-hide" ng-show="model.comments">Comments</h5>
 <div class="row" ng-repeat="comment in model.comments">
 	<div class="col-md-1">
 		<img class="img-thumbnail" ng-src="{{comment.owner.profile_image}}"/>
@@ -40,7 +40,8 @@
 
 
 <div class="page-header">
-	<h2>Answers</h2>
+	<h2 class="ng-hide" ng-show="model.answers">Answers</h2>
+	<h2 ng-hide="model.answers">Unanswered</h2>
 </div>
 
 <div class="row">
