@@ -9,9 +9,17 @@ var App = angular.module('app', [
 	'app.question',
 	// 'app.version'
 ]);
-App.config(['$routeProvider', function($routeProvider) {}]);
+App.config(['$routeProvider', function($routeProvider) {
+
+	// if you are somewhere random in the app, forward to login
+	$routeProvider.otherwise({redirectTo: '/login'});
+
+}]);
+
+
 App.run(['$rootScope', '$location', function($rootScope, $location) {
-	// $routeProvider.otherwise({redirectTo: '/view1'});
+	
+	// check for an open session, if one doesnt exist go to login
 	$rootScope.$on('$locationChangeStart', function (e, next, current) {
 		if(!$rootScope.access_token){
 			if(typeof(Storage) !== 'undefined') {
