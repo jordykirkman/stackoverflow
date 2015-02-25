@@ -6662,7 +6662,10 @@ nav.navbar > li:last-child {
   border: solid 1px #333333;
 }
 .label.tag {
+  display: inline-block;
+  font-size: 1em;
   margin-right: 0.6em;
+  margin-bottom: 0.6em;
   text-shadow: 1px 1px 2px #002733;
 }
 .align-center {
