@@ -73,12 +73,20 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}).success(function(data){
-			$scope.model.favorited = true;
-			$rootScope.alert = { 
-				title: "Question favorited",
-				text: "It will take a few minutes before showing up on the dashboard.",
-				type: "success",
-			};
+			if(data.items){
+				$scope.model.favorited = data.items[0].favorited;
+				$rootScope.alert = { 
+					title: data.items[0].favorited ? "Question favorited" : "Question un-favorated",
+					text: "It will take a few minutes before showing up on the dashboard.",
+					type: "success",
+				};
+			} else {
+				$rootScope.alert = { 
+					title: "Problem",
+					text: "I wasnt able to favorite your question. Try again later.",
+					type: "error",
+				};
+			}
 
 			$timeout(function(){
 				$rootScope.alert = null;
