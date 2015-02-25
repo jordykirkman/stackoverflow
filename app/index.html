@@ -29,11 +29,11 @@
       </h5>
     </div>
     <div class="col-md-6">
-      <nav class="navbar navbar-inverse animated fadeInDown" ng-show="access_token" class="ng-hide">
+      <nav class="navbar navbar-inverse animated fadeInDown ng-hide" ng-show="access_token">
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li>
-              <img class="img-icon" ng-src="{{me.profile_image}}?s=50&g=1" ng-show="me" class="ng-hide"/>
+              <img class="img-icon ng-hide" ng-src="{{me.profile_image}}?s=50&g=1" ng-show="me"/>
             </li>
             <li>
               <a href="#/user" ng-show="me" class="ng-hide">Hi, {{me.display_name}}.</a>
