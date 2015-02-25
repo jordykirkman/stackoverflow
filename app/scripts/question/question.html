@@ -6,7 +6,7 @@
 				<img class="img-thumbnail" ng-src="{{model.owner.profile_image}}"/>
 			</div>
 			<div class="col-md-11">
-				<a href="{{owner.link}}" target="_blank">
+				<a href="{{model.owner.link}}" target="_blank">
 					{{model.owner.display_name}} {{model.owner.reputation}}<br/>
 				</a>
 				asked {{model.creation_date * 1000 | date : 'MM/dd/yyyy'}}
@@ -30,11 +30,13 @@
 	<div class="col-md-1">
 		<img class="img-thumbnail" ng-src="{{comment.owner.profile_image}}"/>
 	</div>
-	<div class="col-md-11">
-		<a href="{{comment.owner.link}}" target="_blank">
-			<h6>{{comment.owner.display_name}} {{comment.owner.reputation}}</h6>
-		</a>
-		{{comment.body}}
+	<div class="col-md-11 question-box-interior">
+		<p>
+			<a href="{{comment.owner.link}}" target="_blank">
+				<h6>{{comment.owner.display_name}} {{comment.owner.reputation}}</h6>
+			</a>
+			{{comment.body}}
+		</p>
 	</div>
 </div>
 
@@ -45,8 +47,8 @@
 </div>
 
 <div class="row">
-	<div ng-class="{'success-border':item.is_accepted}" class="col-md-12 question-box" ng-repeat="item in model.answers">
-		<div class="row">
+	<div class="col-md-12" ng-repeat="item in model.answers">
+		<div class="row question-box" ng-class="{'success-border':item.is_accepted}">
 			<div class="col-md-1 align-center">
 				<h3><span class="glyphicon glyphicon-ok success" ng-show="item.is_accepted" class="ng-hide"></span></h3>
 				<h4>
@@ -74,7 +76,22 @@
 				</div>
 			</div>
 		</div>
-
+		<h5 class="ng-hide" ng-show="item.comments">Comments</h5>
+		<div class="row" ng-repeat="comment in item.comments">
+			<div class="col-md-1">
+				<img class="img-thumbnail" ng-src="{{comment.owner.profile_image}}"/>
+			</div>
+			<div class="col-md-11 question-box-interior">
+				<p>
+					<a href="{{comment.owner.link}}" target="_blank">
+						<h6>{{comment.owner.display_name}} {{comment.owner.reputation}}</h6>
+					</a>
+					{{comment.body}}
+				</p>
+			</div>
+		</div>
+		</div>
+		
 	</div>
 </div>
 </div>

@@ -1,9 +1,9 @@
 <div class="ng-hide animated" ng-show="model.$resolved" ng-class="{'fadeIn':model.$resolved}">
 <div class="row">
 	<div class="col-md-4">
-		<div class="row question-box">
+		<div class="row">
 			<div class="col-m-12 align-center">
-				<img ng-src="{{model.profile_image}}"/>
+				<img class="img-thumbnail" ng-src="{{model.profile_image}}"/>
 			</div>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 	<h1>Recent activity</h1>
 </div>
 
-<div class="row">
+<div class="row question-box">
 	<div class="col-md-2 align-center" ng-repeat="item in timeline">
 		<h4>{{item.timeline_type}}</h4>
 		{{item.creation_date * 1000 | date : 'MM/dd/yyyy'}}
