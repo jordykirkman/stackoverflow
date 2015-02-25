@@ -24,9 +24,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
+      <h5 class="animated fadeInDown ng-hide" ng-show="alert">
+        <strong ng-class="alert.type">{{alert.title}}</strong> {{alert.text}}
+      </h5>
     </div>
     <div class="col-md-6">
-      <nav class="navbar navbar-inverse" ng-show="access_token" class="ng-hide">
+      <nav class="navbar navbar-inverse animated fadeInDown" ng-show="access_token" class="ng-hide">
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li>

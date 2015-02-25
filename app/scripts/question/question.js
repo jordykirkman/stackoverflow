@@ -10,9 +10,9 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 }])
 
 // get a question by id. the method returns a list, but since we will only submit one, we just want the first back
-.factory('Question', ['$resource', '$rootScope', '$sce',
-	function($resource, $rootScope, $sce){
-		return $resource('https://api.stackexchange.com/2.2/questions/:question_id', {question_id: '@question_id'}, {
+.factory('Question', ['$resource', '$rootScope', '$sce', '$http',
+	function($resource, $rootScope, $sce, $http){
+		return $resource('https://api.stackexchange.com/2.2/questions/:question_id', {question_id: '@question_id', undo: '@undo'}, {
 			query: {
 				cache: true,
 				method:'GET',
@@ -45,43 +45,11 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 					}
 				}
 			},
-			save: {
-				method:'POST',
-				url: 'https://api.stackexchange.com/2.2/questions/:question_id/favorite',
-				params:{
-					access_token: $rootScope.access_token,
-					key: '6S9zu7acV8JdHBn473Q6yw((',
-					filter: '!9YdnS9*GS',
-					site: 'stackoverflow'
-				},
-				isArray:false,
-				// stackoverflow returns objects in an "items" array
-				transformResponse: function(data){
-					if(JSON.parse(data).items){
-						var question = JSON.parse(data).items[0];
-						// we need angular to allow these strings to be read as html
-						question.body = $sce.trustAsHtml(question.body);
-						if(question.answers){
-							question.answers.forEach(function(answer){
-								answer.body = $sce.trustAsHtml(answer.body);
-							});
-						}
-						if(question.comments){
-							question.comments.forEach(function(comment){
-								comment.body = $sce.trustAsHtml(comment.body);
-							});
-						}
-						return question;
-					} else {
-						return JSON.parse(data);
-					}
-				}
-			},
 		});
 	}
 ])
 
-.controller('QuestionController', ['Question', '$scope', '$routeParams', '$rootScope', '$http', '$q', function(Question, $scope, $routeParams, $rootScope, $http, $q) {
+.controller('QuestionController', ['Question', '$scope', '$routeParams', '$rootScope', '$http', '$timeout', function(Question, $scope, $routeParams, $rootScope, $http, $timeout) {
 
 	$scope.model = Question.query({question_id: $routeParams.question_id});
 
@@ -90,24 +58,33 @@ angular.module('app.question', ['ngRoute', 'ngResource'])
 	$scope.favorite = function(undo){
 		undo = undo === true ? '/undo' : '';
 		// Angular really doesnt seem to like some of the non-standard quirks of the stackoverflow api
-		// to favorit a question, it requires params to be passed as a form in place of any data to be posted
-		// using ajax here because $resource and $http norms dont work/are rejected by api
-		jQuery.ajax({
+		// to favorite a question, it requires params to be passed as form data in place of any real data
+		// using $http here because $resource norms dont work with the api
+		$http({
 		    url: 'https://api.stackexchange.com/2.2/questions/' + $routeParams.question_id + '/favorite' + undo,
-		    data: {
+		    data: $.param({
 				access_token: $rootScope.access_token,
 				key: '6S9zu7acV8JdHBn473Q6yw((',
 				filter: '!9YdnS9*GS',
 				site: 'stackoverflow'
-			},
-			type:'POST',
+			}),
+			method:'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			success: function(msg) {
-				console.log(msg);
 			}
+		}).success(function(data){
+			$scope.model.favorited = true;
+			$rootScope.alert = { 
+				title: "Question favorited",
+				text: "It will take a few minutes before showing up on the dashboard.",
+				type: "success",
+			};
+
+			$timeout(function(){
+				$rootScope.alert = null;
+			}, 10000);
 		});
 	}
+
 
 }]);

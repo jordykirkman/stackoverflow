@@ -133,12 +133,12 @@ angular.module('app.user', ['ngRoute', 'ngResource'])
 	function($resource, $rootScope){
 		return $resource('https://api.stackexchange.com/2.2/me/favorites', {}, {
 			query: {
-				cache: true,
+				cache: false,
 				method:'GET',
 				params:{
 					access_token: $rootScope.access_token,
 					key: '6S9zu7acV8JdHBn473Q6yw((',
-					filter: '!--OzR77qYOnX',
+					filter: '!bB.KRGAQOGAQ18',
 					site: 'stackoverflow'
 				},
 				isArray:true,
